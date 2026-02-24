@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Math Collège Premium - Sénégal</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        section {
+            padding: 30px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 70%;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 8px;
+            margin: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    Plateforme Math Collège - Sénégal
+</nav>
+
+<!-- LOGIN -->
+
+<section id="login">
+    <div class="box">
+        <h2>Accès Abonné</h2>
+        <p>Paiement mensuel via Wave</p>
+        <input type="password" id="password" placeholder="Mot de passe">
+        <br>
+        <button onclick="verifier()">Se connecter</button>
+        <p id="message"></p>
+    </div>
+</section>
+
+<!-- COURS -->
+
+<section id="contenu" class="hidden">
+
+    <div class="box">
+        <h2>Chapitre 1 : Opérations</h2>
+        <p>5 + 3 = 8</p>
+        <p>9 - 4 = 5</p>
+        <p>3 × 4 = 12</p>
+
+        <h3>Exercice</h3>
+        <p>Combien fait 6 × 2 ?</p>
+        <input type="number" id="rep1">
+        <button onclick="verifier1()">Vérifier</button>
+        <p id="res1"></p>
+    </div>
+
+    <div class="box">
+        <h2>Chapitre 2 : Fractions</h2>
+        <p>1/2 + 1/2 = 1</p>
+        <p>1/4 + 1/4 = 1/2</p>
+
+        <h3>Exercice</h3>
+        <p>Combien fait 1/2 + 1/2 ?</p>
+        <input type="number" id="rep2">
+        <button onclick="verifier2()">Vérifier</button>
+        <p id="res2"></p>
+    </div>
+
+    <div class="box">
+        <h2>Chapitre 3 : Équations simples</h2>
+        <p>x + 5 = 12</p>
+        <p>Donc x = 7</p>
+
+        <h3>Exercice</h3>
+        <p>2x = 10. Combien vaut x ?</p>
+        <input type="number" id="rep3">
+        <button onclick="verifier3()">Vérifier</button>
+        <p id="res3"></p>
+    </div>
+
+</section>
+
+<script>
+
+    let motDePasse = "2024";
+
+    function verifier() {
+        let valeur = document.getElementById("password").value;
+
+        if (valeur === motDePasse) {
+            document.getElementById("login").classList.add("hidden");
+            document.getElementById("contenu").classList.remove("hidden");
+        } else {
+            document.getElementById("message").innerText = "Mot de passe incorrect.";
+        }
+    }
+
+    function verifier1() {
+        let valeur = document.getElementById("rep1").value;
+        if (valeur == 12) {
+            document.getElementById("res1").innerText = "Bonne réponse !";
+        } else {
+            document.getElementById("res1").innerText = "Incorrect.";
+        }
+    }
+
+    function verifier2() {
+        let valeur = document.getElementById("rep2").value;
+        if (valeur == 1) {
+            document.getElementById("res2").innerText = "Bonne réponse !";
+        } else {
+            document.getElementById("res2").innerText = "Incorrect.";
+        }
+    }
+
+    function verifier3() {
+        let valeur = document.getElementById("rep3").value;
+        if (valeur == 5) {
+            document.getElementById("res3").innerText = "Bonne réponse !";
+        } else {
+            document.getElementById("res3").innerText = "Incorrect.";
+        }
+    }
+
+</script>
+
+</body>
+</html>
