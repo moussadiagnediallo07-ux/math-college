@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excellence Math Collège - Sénégal</title>
+
+<style>
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+}
+
+/* HEADER */
+header{
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+}
+
+/* NAV */
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    background:#111;
+    padding:10px;
+}
+
+nav button{
+    background:none;
+    border:none;
+    color:white;
+    margin:5px 10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* SECTIONS */
+section{
+    padding:20px;
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+/* CARD */
+.card{
+    background:white;
+    color:black;
+    padding:20px;
+    border-radius:12px;
+    max-width:500px;
+    margin:20px auto;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* INPUTS */
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+/* BUTTON */
+.main-btn{
+    width:100%;
+    padding:12px;
+    background:#0077b6;
+    border:none;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.main-btn:hover{
+    background:#023e8a;
+}
+
+.score{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:15px;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:15px;
+    font-size:12px;
+    opacity:0.8;
+}
+
+/* MOBILE OPTIMISATION */
+@media(max-width:600px){
+    header h1{
+        font-size:18px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎓 Excellence Math Collège 🇸🇳</h1>
+    <p>Soutien scolaire interactif</p>
+</header>
+
+<nav>
+    <button onclick="show('home')">Accueil</button>
+    <button onclick="show('abonnement')">Abonnement</button>
+    <button onclick="show('login')">Espace Élève</button>
+</nav>
+
+<section id="home" class="active">
+    <div class="card">
+        <h3>Pourquoi nous choisir ?</h3>
+        <p>✔ Exercices interactifs</p>
+        <p>✔ Amélioration des notes</p>
+        <p>✔ Accessible partout au Sénégal</p>
+        <p>✔ Suivi régulier</p>
+    </div>
+</section>
+
+<section id="abonnement">
+    <div class="card">
+        <h3>Abonnement Mensuel</h3>
+        <p><strong>2 000 FCFA / mois</strong></p>
+        <p>Paiement via Wave</p>
+        <p>1️⃣ Effectuez le paiement</p>
+        <p>2️⃣ Envoyez la preuve</p>
+        <p>3️⃣ Recevez votre accès</p>
+    </div>
+</section>
+
+<section id="login">
+    <div class="card">
+        <h3>Connexion</h3>
+        <input type="text" id="nom" placeholder="Nom de l'élève">
+        <input type="password" id="password" placeholder="Code d'accès">
+        <button class="main-btn" onclick="login()">Se connecter</button>
+        <p id="message" style="color:red;text-align:center;"></p>
+    </div>
+
+    <div class="card" id="quizBox" style="display:none;">
+        <h3 id="welcome"></h3>
+
+        <p id="q1"></p>
+        <input type="number" id="r1">
+
+        <p id="q2"></p>
+        <input type="number" id="r2">
+
+        <p id="q3"></p>
+        <input type="number" id="r3">
+
+        <button class="main-btn" onclick="corriger()">Corriger</button>
+
+        <div class="score" id="resultat"></div>
+    </div>
+</section>
+
+<footer>
+© 2024 Excellence Math Collège - Sénégal
+</footer>
+
+<script>
+
+let codeAcces = btoa("2024"); // encodé base64 (petite protection)
+let rep1,rep2,rep3;
+
+function show(id){
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function login(){
+
+    let nom=document.getElementById("nom").value;
+    let pass=document.getElementById("password").value;
+
+    if(nom!=="" && btoa(pass)===codeAcces){
+
+        document.getElementById("quizBox").style.display="block";
+        document.getElementById("welcome").innerText="Bienvenue "+nom+" 👋";
+
+        generer();
+
+    }else{
+        document.getElementById("message").innerText="Accès refusé.";
+    }
+}
+
+function generer(){
+
+    let a=Math.floor(Math.random()*20);
+    let b=Math.floor(Math.random()*20);
+    rep1=a+b;
+    document.getElementById("q1").innerText=a+" + "+b+" = ?";
+
+    let c=Math.floor(Math.random()*10);
+    rep2=c*2;
+    document.getElementById("q2").innerText="2x = "+rep2+" , x = ?";
+
+    let d=Math.floor(Math.random()*10);
+    rep3=d*d;
+    document.getElementById("q3").innerText=d+" × "+d+" = ?";
+}
+
+function corriger(){
+
+    let score=0;
+
+    if(document.getElementById("r1").value==rep1) score++;
+    if(document.getElementById("r2").value==rep2) score++;
+    if(document.getElementById("r3").value==rep3) score++;
+
+    document.getElementById("resultat").innerText="Score : "+score+" / 3";
+}
+
+</script>
+
+</body>
+</html>
